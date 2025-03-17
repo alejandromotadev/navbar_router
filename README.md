@@ -9,7 +9,7 @@
 ![Floating
   Navbar](https://github.com/maheshmnj/navbar_router/assets/31410839/7da504ae-4894-481c-a443-01a24fc61946)
 
-_Checkout our [extensive docs](https://docs.maheshjamdade.com/navbar_router/) to learn more about this package, the inspiration behind it and how to use it._
+_Checkout our [extensive docs](https://docs.widgetmedialabs.com/navbar_router/) to learn more about this package, the inspiration behind it and how to use it._
 
 ## Adding a BottomNavigationBar to your app?
 
@@ -273,7 +273,7 @@ NavbarItem(Icons.home_outlined, 'Home',
 
 <img src="https://github.com/maheshmnj/navbar_router/assets/31410839/2362187a-0a19-41a0-938c-214c103e64dd">
 
-For detailed description of all the features and properties please visit the [documentation](https://docs.maheshjamdade.com/navbar_router)
+For detailed description of all the features and properties please visit the [documentation](https://docs.widgetmedialabs.com/navbar_router)
 
 ### Curious how the navbar_router works?
 
