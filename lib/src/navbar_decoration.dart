@@ -265,23 +265,16 @@ class NavbarDecoration {
 
 class NotchedDecoration extends NavbarDecoration {
   NotchedDecoration({
-    Color? backgroundColor,
-    double? elevation,
+    super.backgroundColor,
+    super.elevation,
     bool? showUnselectedLabels = true,
-    TextStyle? unselectedLabelTextStyle,
-    Color? unselectedIconColor,
-    Color? selectedIconColor,
-    Color? unselectedLabelColor,
-    IconThemeData? selectedIconTheme,
+    super.unselectedLabelTextStyle,
+    super.unselectedIconColor,
+    super.selectedIconColor,
+    super.unselectedLabelColor,
+    super.selectedIconTheme,
   }) : super(
-          backgroundColor: backgroundColor,
-          elevation: elevation,
-          unselectedIconColor: unselectedIconColor,
           showUnselectedLabels: showUnselectedLabels!,
-          selectedIconColor: selectedIconColor,
-          unselectedLabelColor: unselectedLabelColor,
-          unselectedLabelTextStyle: unselectedLabelTextStyle,
-          selectedIconTheme: selectedIconTheme,
         );
 
   factory NotchedDecoration.fromNavbarDecoration(
@@ -314,36 +307,30 @@ class NotchedDecoration extends NavbarDecoration {
 class M3NavbarDecoration extends NavbarDecoration {
   M3NavbarDecoration({
     /// The backgroundColor of the Navbar
-    Color? backgroundColor,
+    super.backgroundColor,
 
     /// Defines whether to show/hide labels
-    NavigationDestinationLabelBehavior labelBehavior =
-        NavigationDestinationLabelBehavior.alwaysShow,
+    NavigationDestinationLabelBehavior super.labelBehavior,
 
     /// Color for the indicator shown around the seleccted item
-    Color? indicatorColor,
+    super.indicatorColor,
 
     /// Textstyle of the labels
     TextStyle? labelTextStyle,
 
     /// The elevation shadown on the edges of bottomnavigationbar
-    double? elevation,
+    super.elevation,
 
     /// height of the navbar
     final double? height,
 
     /// iconTheme for the icons
     IconThemeData? iconTheme,
-    ShapeBorder? indicatorShape,
+    super.indicatorShape,
     bool? isExtended,
   }) : super(
-            backgroundColor: backgroundColor,
-            elevation: elevation,
-            indicatorColor: indicatorColor,
-            labelBehavior: labelBehavior,
             selectedLabelTextStyle: labelTextStyle,
             unselectedLabelTextStyle: labelTextStyle,
-            indicatorShape: indicatorShape,
             selectedIconTheme: iconTheme,
             isExtended: isExtended ?? false,
             height: height ?? 80.0);
@@ -379,24 +366,16 @@ class M3NavbarDecoration extends NavbarDecoration {
 
 class FloatingNavbarDecoration extends NavbarDecoration {
   FloatingNavbarDecoration(
-      {Color? backgroundColor,
-      Color? unselectedIconColor,
-      Color? selectedIconColor,
-      EdgeInsetsGeometry? margin,
-      BorderRadius? borderRadius,
+      {super.backgroundColor,
+      super.unselectedIconColor,
+      super.selectedIconColor,
+      super.margin,
+      super.borderRadius,
       double? height,
       bool? showSelectedLabels,
       bool? isExtended})
       : super(
-          backgroundColor: backgroundColor,
-          borderRadius: borderRadius,
           height: height ?? kFloatingNavbarHeight,
-
-          /// margin for the floaiting navbar defaults to EdgeInsets.symmetric(horizontal: 48.0, vertical: 20),
-          ///
-          margin: margin,
-          unselectedIconColor: unselectedIconColor,
-          selectedIconColor: selectedIconColor,
           showSelectedLabels: showSelectedLabels ?? true,
           isExtended: isExtended ?? false,
         );

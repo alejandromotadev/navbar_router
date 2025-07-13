@@ -51,14 +51,13 @@ Widget buildBadge(
 
 class _AnimatedNavBar extends StatefulWidget {
   const _AnimatedNavBar(
-      {Key? key,
+      {super.key,
       this.decoration,
       required this.model,
       this.isDesktop = false,
       this.navbarType = NavbarType.standard,
       required this.menuItems,
-      required this.onItemTapped})
-      : super(key: key);
+      required this.onItemTapped});
   final List<NavbarItem> menuItems;
   final NavbarNotifier model;
   final Function(int) onItemTapped;
@@ -438,7 +437,7 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
 }
 
 abstract class NavbarBase extends StatefulWidget {
-  const NavbarBase({Key? key}) : super(key: key);
+  const NavbarBase({super.key});
   NavbarDecoration get decoration;
 
   double? get elevation;
@@ -452,14 +451,13 @@ abstract class NavbarBase extends StatefulWidget {
 
 class StandardNavbar extends NavbarBase {
   const StandardNavbar(
-      {Key? key,
+      {super.key,
       required this.navBarDecoration,
       required this.navBarElevation,
       required this.onTap,
       this.navbarHeight,
       this.index = 0,
-      required this.items})
-      : super(key: key);
+      required this.items});
 
   final List<NavbarItem> items;
   final Function(int) onTap;
@@ -538,7 +536,7 @@ class StandardNavbarState extends State<StandardNavbar> {
 
 class NotchedNavBar extends NavbarBase {
   const NotchedNavBar(
-      {Key? key,
+      {super.key,
       required this.notchDecoration,
       required this.color,
       required this.navBarElevation,
@@ -551,8 +549,7 @@ class NotchedNavBar extends NavbarBase {
             This is a temporary limitation and will be fixed in the future.
             If you need a navbar with less than 3 items, please use the StandardNavbar widget
             using the NavbarDecoration.navbarType: NavbarType.standard property.
-            """),
-        super(key: key);
+            """);
 
   final List<NavbarItem> items;
   final Function(int) onTap;
@@ -667,7 +664,7 @@ class NotchedNavBarState extends State<NotchedNavBar>
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withAlpha(51),
               spreadRadius: 2,
               blurRadius: 5,
               offset: const Offset(0, 3), // changes position of shadow
@@ -857,7 +854,7 @@ class WaveClipper extends CustomClipper<Path> {
 
 class M3NavBar extends NavbarBase {
   const M3NavBar({
-    Key? key,
+    super.key,
     required this.items,
     required this.onTap,
     required this.m3Decoration,
@@ -865,7 +862,7 @@ class M3NavBar extends NavbarBase {
     this.navBarElevation,
     this.navbarHeight = kM3NavbarHeight,
     required this.index,
-  }) : super(key: key);
+  });
 
   final List<NavbarItem> items;
   final Function(int) onTap;
@@ -946,7 +943,7 @@ class M3NavBarState extends State<M3NavBar> {
 
 class FloatingNavbar extends NavbarBase {
   const FloatingNavbar(
-      {Key? key,
+      {super.key,
       required this.navBarDecoration,
       required this.navBarElevation,
       required this.onTap,
@@ -954,8 +951,7 @@ class FloatingNavbar extends NavbarBase {
       this.index = 0,
       this.margin,
       this.borderRadius,
-      required this.items})
-      : super(key: key);
+      required this.items});
 
   final List<NavbarItem> items;
   final Function(int) onTap;
@@ -1047,8 +1043,8 @@ class FloatingNavbarState extends State<FloatingNavbar> {
             boxShadow: [
               BoxShadow(
                 color: isDark
-                    ? Colors.black.withOpacity(0.2)
-                    : Colors.grey.withOpacity(0.2),
+                    ? Colors.black.withAlpha(51)
+                    : Colors.grey.withAlpha(51),
                 spreadRadius: 2,
                 blurRadius: 6,
                 offset: const Offset(3, 4), // hanges position of shadow

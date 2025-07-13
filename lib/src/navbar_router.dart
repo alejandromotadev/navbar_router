@@ -161,7 +161,7 @@ class NavbarRouter extends StatefulWidget {
   ///
   ///
   const NavbarRouter(
-      {Key? key,
+      {super.key,
       required this.destinations,
       required this.errorBuilder,
       this.shouldPopToBaseRoute = true,
@@ -177,8 +177,7 @@ class NavbarRouter extends StatefulWidget {
       this.hideBadgeOnPageChanged = true,
       this.onBackButtonPressed})
       : assert(destinations.length >= 2,
-            "Destinations length must be greater than or equal to 2"),
-        super(key: key);
+            "Destinations length must be greater than or equal to 2");
 
   @override
   State<NavbarRouter> createState() => _NavbarRouterState();

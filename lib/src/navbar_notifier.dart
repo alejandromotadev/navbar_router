@@ -182,7 +182,7 @@ class NavbarNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  static void hideSnackBar(context) {
+  static void hideSnackBar(BuildContext context) {
     if (ScaffoldMessenger.of(context).mounted) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
     }

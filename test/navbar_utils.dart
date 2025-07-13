@@ -46,7 +46,7 @@ final List<Color> themeColorSeed = [
 ];
 
 class HomeFeeds extends StatefulWidget {
-  const HomeFeeds({Key? key}) : super(key: key);
+  const HomeFeeds({super.key});
   static const String route = '/';
 
   @override
@@ -120,7 +120,7 @@ class _HomeFeedsState extends State<HomeFeeds> {
 
 class FeedTile extends StatelessWidget {
   final int index;
-  const FeedTile({Key? key, required this.index}) : super(key: key);
+  const FeedTile({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +158,7 @@ class FeedTile extends StatelessWidget {
 
 class FeedDetail extends StatelessWidget {
   final String feedId;
-  const FeedDetail({Key? key, this.feedId = '1'}) : super(key: key);
+  const FeedDetail({super.key, this.feedId = '1'});
   static const String route = '/feeds/detail';
   @override
   Widget build(BuildContext context) {
@@ -186,7 +186,7 @@ class FeedDetail extends StatelessWidget {
 }
 
 class ProductList extends StatefulWidget {
-  const ProductList({Key? key}) : super(key: key);
+  const ProductList({super.key});
   static const String route = '/';
 
   @override
@@ -271,7 +271,7 @@ class _ProductListState extends State<ProductList> {
 
 class ProductTile extends StatelessWidget {
   final int index;
-  const ProductTile({Key? key, required this.index}) : super(key: key);
+  const ProductTile({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -304,7 +304,7 @@ class ProductTile extends StatelessWidget {
 
 class ProductDetail extends StatelessWidget {
   final String id;
-  const ProductDetail({Key? key, this.id = '1'}) : super(key: key);
+  const ProductDetail({super.key, this.id = '1'});
   static const String route = '/products/detail';
   @override
   Widget build(BuildContext context) {
@@ -339,7 +339,7 @@ class ProductDetail extends StatelessWidget {
 
 class ProductComments extends StatelessWidget {
   final String id;
-  const ProductComments({Key? key, this.id = '1'}) : super(key: key);
+  const ProductComments({super.key, this.id = '1'});
   static const String route = '/products/detail/comments';
   @override
   Widget build(BuildContext context) {
@@ -366,7 +366,7 @@ class ProductComments extends StatelessWidget {
 class UserProfile extends StatefulWidget {
   static const String route = '/';
 
-  const UserProfile({Key? key}) : super(key: key);
+  const UserProfile({super.key});
 
   @override
   State<UserProfile> createState() => _UserProfileState();
@@ -506,7 +506,7 @@ class _SettingsState extends State<Settings> {
 class ProfileEdit extends StatelessWidget {
   static const String route = '/profile/edit';
 
-  const ProfileEdit({Key? key}) : super(key: key);
+  const ProfileEdit({super.key});
 
   @override
   Widget build(BuildContext context) {
