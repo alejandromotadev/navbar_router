@@ -293,8 +293,6 @@ class _NavbarRouterState extends State<NavbarRouter>
         return 0;
       case NavbarType.floating:
         return 0;
-      default:
-        return 0;
     }
   }
 
@@ -369,6 +367,8 @@ class _NavbarRouterState extends State<NavbarRouter>
                     bottom: bottomPadding(),
                     right: widget.isDesktop ? null : 0,
                     child: _AnimatedNavBar(
+                        key: ValueKey(
+                            '${widget.type.toString()}-${widget.isDesktop}'),
                         model: _navbarNotifier,
                         isDesktop: widget.isDesktop,
                         decoration: widget.decoration,

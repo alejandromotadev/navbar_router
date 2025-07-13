@@ -1,3 +1,7 @@
+## [0.7.6] July 12, 2025
+
+- Fix: Null check error
+
 ## [0.7.6] August 18, 2024
 
 - [Regression] Programmatically change Index [Issue #57](https://github.com/maheshj01/navbar_router/issues/57)
