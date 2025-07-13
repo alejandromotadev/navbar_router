@@ -1,4 +1,4 @@
-## [0.7.6] July 12, 2025
+## [0.7.7] July 12, 2025
 
 - Fix: Null check error
 
