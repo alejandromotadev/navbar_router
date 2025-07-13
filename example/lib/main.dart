@@ -192,8 +192,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
-                      width: 60,
+                    SizedBox(
+                      width: 20,
                     ),
                     FloatingActionButton.extended(
                       heroTag: 'RandomIndex',
@@ -218,31 +218,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                         );
                       },
                       label: const Text("Show SnackBar"),
-                    ),
-                    FloatingActionButton(
-                      heroTag: 'navbar',
-                      child: Icon(NavbarNotifier.isNavbarHidden
-                          ? Icons.toggle_off
-                          : Icons.toggle_on),
-                      onPressed: () {
-                        // Programmatically toggle the Navbar visibility
-                        if (NavbarNotifier.isNavbarHidden) {
-                          NavbarNotifier.hideBottomNavBar = false;
-                        } else {
-                          NavbarNotifier.hideBottomNavBar = true;
-                        }
-                        setState(() {});
-                      },
-                    ),
-                    FloatingActionButton(
-                      heroTag: 'darkmode',
-                      child: Icon(appSetting.isDarkMode
-                          ? Icons.wb_sunny
-                          : Icons.nightlight_round),
-                      onPressed: () {
-                        appSetting.toggleTheme();
-                        setState(() {});
-                      },
                     ),
                   ],
                 ),
