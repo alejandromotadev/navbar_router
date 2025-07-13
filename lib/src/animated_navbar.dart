@@ -345,14 +345,6 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
               navBarElevation: defaultDecoration.elevation,
             );
           }
-
-        default:
-          return StandardNavbar(
-            navBarDecoration: widget.decoration!,
-            items: widget.menuItems,
-            onTap: widget.onItemTapped,
-            navBarElevation: widget.decoration!.elevation,
-          );
       }
     }
 
