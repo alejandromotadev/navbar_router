@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:navbar_router/navbar_router.dart';
 
 class NavbarItem {
-  const NavbarItem(this.iconData, this.text,
-      {this.backgroundColor,
-      this.child,
-      this.selectedIcon,
-      this.badge = const NavbarBadge()});
+  const NavbarItem(
+    this.iconData,
+    this.text, {
+    this.backgroundColor,
+    this.child,
+    this.selectedIcon,
+    this.badge = const NavbarBadge(),
+  });
 
   /// IconData for the navbar item
   final IconData iconData;
@@ -30,7 +33,8 @@ class NavbarItem {
 
   @override
   bool operator ==(Object other) {
-    bool result = other is NavbarItem &&
+    bool result =
+        other is NavbarItem &&
         runtimeType == other.runtimeType &&
         iconData == other.iconData &&
         text == other.text &&
@@ -39,8 +43,8 @@ class NavbarItem {
         backgroundColor == other.backgroundColor &&
         badge == other.badge;
     if ((other as NavbarItem).selectedIcon.runtimeType == Icon && result) {
-      result = (selectedIcon as Icon).color ==
-              (other.selectedIcon as Icon).color &&
+      result =
+          (selectedIcon as Icon).color == (other.selectedIcon as Icon).color &&
           (selectedIcon as Icon).icon == (other.selectedIcon as Icon).icon &&
           (selectedIcon as Icon).size == (other.selectedIcon as Icon).size;
     }
@@ -63,6 +67,9 @@ class NavbarDecoration {
   /// The type of the Navbar to be displayed
   /// [BottomNavigationBarType.fixed] or [BottomNavigationBarType.shifting]
   final BottomNavigationBarType? navbarType;
+  final Widget? selectedIcon;
+  final Widget? unselectedIcon;
+  final Widget? child;
 
   /// The backgroundColor of the Navbar
   final Color? backgroundColor;
@@ -139,6 +146,9 @@ class NavbarDecoration {
     this.elevation,
     this.enableFeedback,
     this.isExtended = false,
+    this.selectedIcon,
+    this.unselectedIcon,
+    this.child,
     this.indicatorColor,
     this.navbarType,
     this.height = 80,
@@ -167,6 +177,9 @@ class NavbarDecoration {
     bool? isExtended,
     Color? unselectedItemColor,
     double? elevation,
+    Widget? selectedIcon,
+    Widget? unselectedIcon,
+    Widget? child,
     double? height,
     double? minWidth,
     double? minExtendedWidth,
@@ -184,34 +197,36 @@ class NavbarDecoration {
     TextStyle? unselectedLabelTextStyle,
     IconThemeData? selectedIconTheme,
     IconThemeData? unselectedIconTheme,
-  }) =>
-      NavbarDecoration(
-        navbarType: navbarType ?? this.navbarType,
-        height: height ?? this.height,
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        borderRadius: borderRadius ?? this.borderRadius,
-        isExtended: isExtended ?? this.isExtended,
-        margin: margin ?? this.margin,
-        minExtendedWidth: minExtendedWidth ?? this.minExtendedWidth,
-        minWidth: minWidth ?? this.minWidth,
-        unselectedItemColor: unselectedItemColor ?? this.unselectedItemColor,
-        elevation: elevation ?? this.elevation,
-        unselectedIconColor: unselectedIconColor ?? this.unselectedIconColor,
-        selectedIconColor: selectedIconColor ?? this.selectedIconColor,
-        showUnselectedLabels: showUnselectedLabels ?? this.showUnselectedLabels,
-        unselectedLabelColor: unselectedLabelColor ?? this.unselectedLabelColor,
-        showSelectedLabels: showSelectedLabels ?? this.showSelectedLabels,
-        enableFeedback: enableFeedback ?? this.enableFeedback,
-        indicatorColor: indicatorColor ?? this.indicatorColor,
-        labelBehavior: labelBehavior ?? this.labelBehavior,
-        indicatorShape: indicatorShape ?? this.indicatorShape,
-        selectedLabelTextStyle:
-            selectedLabelTextStyle ?? this.selectedLabelTextStyle,
-        unselectedLabelTextStyle:
-            unselectedLabelTextStyle ?? this.unselectedLabelTextStyle,
-        selectedIconTheme: selectedIconTheme ?? this.selectedIconTheme,
-        unselectedIconTheme: unselectedIconTheme ?? this.unselectedIconTheme,
-      );
+  }) => NavbarDecoration(
+    navbarType: navbarType ?? this.navbarType,
+    selectedIcon: selectedIcon ?? this.selectedIcon,
+    unselectedIcon: unselectedIcon ?? this.unselectedIcon,
+    child: child ?? this.child,
+    height: height ?? this.height,
+    backgroundColor: backgroundColor ?? this.backgroundColor,
+    borderRadius: borderRadius ?? this.borderRadius,
+    isExtended: isExtended ?? this.isExtended,
+    margin: margin ?? this.margin,
+    minExtendedWidth: minExtendedWidth ?? this.minExtendedWidth,
+    minWidth: minWidth ?? this.minWidth,
+    unselectedItemColor: unselectedItemColor ?? this.unselectedItemColor,
+    elevation: elevation ?? this.elevation,
+    unselectedIconColor: unselectedIconColor ?? this.unselectedIconColor,
+    selectedIconColor: selectedIconColor ?? this.selectedIconColor,
+    showUnselectedLabels: showUnselectedLabels ?? this.showUnselectedLabels,
+    unselectedLabelColor: unselectedLabelColor ?? this.unselectedLabelColor,
+    showSelectedLabels: showSelectedLabels ?? this.showSelectedLabels,
+    enableFeedback: enableFeedback ?? this.enableFeedback,
+    indicatorColor: indicatorColor ?? this.indicatorColor,
+    labelBehavior: labelBehavior ?? this.labelBehavior,
+    indicatorShape: indicatorShape ?? this.indicatorShape,
+    selectedLabelTextStyle:
+        selectedLabelTextStyle ?? this.selectedLabelTextStyle,
+    unselectedLabelTextStyle:
+        unselectedLabelTextStyle ?? this.unselectedLabelTextStyle,
+    selectedIconTheme: selectedIconTheme ?? this.selectedIconTheme,
+    unselectedIconTheme: unselectedIconTheme ?? this.unselectedIconTheme,
+  );
 
   @override
   bool operator ==(Object other) =>
@@ -237,7 +252,10 @@ class NavbarDecoration {
           selectedLabelTextStyle == other.selectedLabelTextStyle &&
           unselectedLabelTextStyle == other.unselectedLabelTextStyle &&
           selectedIconTheme == other.selectedIconTheme &&
-          unselectedIconTheme == other.unselectedIconTheme;
+          unselectedIconTheme == other.unselectedIconTheme &&
+          selectedIcon == other.selectedIcon &&
+          unselectedIcon == other.unselectedIcon &&
+          child == other.child;
 
   @override
   int get hashCode =>
@@ -260,7 +278,10 @@ class NavbarDecoration {
       selectedLabelTextStyle.hashCode ^
       unselectedLabelTextStyle.hashCode ^
       selectedIconTheme.hashCode ^
-      unselectedIconTheme.hashCode;
+      unselectedIconTheme.hashCode ^
+      selectedIcon.hashCode ^
+      unselectedIcon.hashCode ^
+      child.hashCode;
 }
 
 class NotchedDecoration extends NavbarDecoration {
@@ -273,35 +294,33 @@ class NotchedDecoration extends NavbarDecoration {
     super.selectedIconColor,
     super.unselectedLabelColor,
     super.selectedIconTheme,
-  }) : super(
-          showUnselectedLabels: showUnselectedLabels!,
-        );
+  }) : super(showUnselectedLabels: showUnselectedLabels!);
 
   factory NotchedDecoration.fromNavbarDecoration(
-          NavbarDecoration navbarDecoration) =>
-      NotchedDecoration(
-        backgroundColor: navbarDecoration.backgroundColor,
-        elevation: navbarDecoration.elevation,
-        unselectedIconColor: navbarDecoration.unselectedIconColor,
-        showUnselectedLabels: navbarDecoration.showUnselectedLabels,
-        selectedIconColor: navbarDecoration.selectedIconColor,
-        unselectedLabelColor: navbarDecoration.unselectedLabelColor,
-        unselectedLabelTextStyle: navbarDecoration.unselectedLabelTextStyle,
-        selectedIconTheme: navbarDecoration.selectedIconTheme,
-      );
+    NavbarDecoration navbarDecoration,
+  ) => NotchedDecoration(
+    backgroundColor: navbarDecoration.backgroundColor,
+    elevation: navbarDecoration.elevation,
+    unselectedIconColor: navbarDecoration.unselectedIconColor,
+    showUnselectedLabels: navbarDecoration.showUnselectedLabels,
+    selectedIconColor: navbarDecoration.selectedIconColor,
+    unselectedLabelColor: navbarDecoration.unselectedLabelColor,
+    unselectedLabelTextStyle: navbarDecoration.unselectedLabelTextStyle,
+    selectedIconTheme: navbarDecoration.selectedIconTheme,
+  );
 
   /// to navb bar decoration
 
   NavbarDecoration toNavbarDecoration() => NavbarDecoration(
-        backgroundColor: backgroundColor,
-        elevation: elevation,
-        unselectedItemColor: unselectedItemColor,
-        unselectedIconColor: unselectedIconColor,
-        showUnselectedLabels: showUnselectedLabels,
-        selectedIconColor: selectedIconColor,
-        unselectedLabelColor: unselectedLabelColor,
-        unselectedLabelTextStyle: unselectedLabelTextStyle,
-      );
+    backgroundColor: backgroundColor,
+    elevation: elevation,
+    unselectedItemColor: unselectedItemColor,
+    unselectedIconColor: unselectedIconColor,
+    showUnselectedLabels: showUnselectedLabels,
+    selectedIconColor: selectedIconColor,
+    unselectedLabelColor: unselectedLabelColor,
+    unselectedLabelTextStyle: unselectedLabelTextStyle,
+  );
 }
 
 class M3NavbarDecoration extends NavbarDecoration {
@@ -329,79 +348,82 @@ class M3NavbarDecoration extends NavbarDecoration {
     super.indicatorShape,
     bool? isExtended,
   }) : super(
-            selectedLabelTextStyle: labelTextStyle,
-            unselectedLabelTextStyle: labelTextStyle,
-            selectedIconTheme: iconTheme,
-            isExtended: isExtended ?? false,
-            height: height ?? 80.0);
+         selectedLabelTextStyle: labelTextStyle,
+         unselectedLabelTextStyle: labelTextStyle,
+         selectedIconTheme: iconTheme,
+         isExtended: isExtended ?? false,
+         height: height ?? 80.0,
+       );
 
   factory M3NavbarDecoration.fromNavbarDecoration(
-          NavbarDecoration navbarDecoration) =>
-      M3NavbarDecoration(
-          height: navbarDecoration.height,
-          backgroundColor: navbarDecoration.backgroundColor,
-          elevation: navbarDecoration.elevation,
-          labelTextStyle: navbarDecoration.selectedLabelTextStyle,
-          iconTheme: navbarDecoration.selectedIconTheme,
-          indicatorColor: navbarDecoration.indicatorColor,
-          indicatorShape: navbarDecoration.indicatorShape,
-          isExtended: navbarDecoration.isExtended,
-          labelBehavior: navbarDecoration.labelBehavior ??
-              NavigationDestinationLabelBehavior.alwaysShow);
+    NavbarDecoration navbarDecoration,
+  ) => M3NavbarDecoration(
+    height: navbarDecoration.height,
+    backgroundColor: navbarDecoration.backgroundColor,
+    elevation: navbarDecoration.elevation,
+    labelTextStyle: navbarDecoration.selectedLabelTextStyle,
+    iconTheme: navbarDecoration.selectedIconTheme,
+    indicatorColor: navbarDecoration.indicatorColor,
+    indicatorShape: navbarDecoration.indicatorShape,
+    isExtended: navbarDecoration.isExtended,
+    labelBehavior:
+        navbarDecoration.labelBehavior ??
+        NavigationDestinationLabelBehavior.alwaysShow,
+  );
 
   NavbarDecoration toNavbarDecoration() => NavbarDecoration(
-        backgroundColor: backgroundColor,
-        elevation: elevation,
-        height: height,
-        unselectedItemColor: unselectedItemColor,
-        unselectedIconColor: unselectedIconColor,
-        showUnselectedLabels: showUnselectedLabels,
-        unselectedLabelColor: unselectedLabelColor,
-        selectedLabelTextStyle: selectedLabelTextStyle,
-        unselectedLabelTextStyle: unselectedLabelTextStyle,
-        labelBehavior: labelBehavior,
-        isExtended: isExtended,
-      );
+    backgroundColor: backgroundColor,
+    elevation: elevation,
+    height: height,
+    unselectedItemColor: unselectedItemColor,
+    unselectedIconColor: unselectedIconColor,
+    showUnselectedLabels: showUnselectedLabels,
+    unselectedLabelColor: unselectedLabelColor,
+    selectedLabelTextStyle: selectedLabelTextStyle,
+    unselectedLabelTextStyle: unselectedLabelTextStyle,
+    labelBehavior: labelBehavior,
+    isExtended: isExtended,
+  );
 }
 
 class FloatingNavbarDecoration extends NavbarDecoration {
-  FloatingNavbarDecoration(
-      {super.backgroundColor,
-      super.unselectedIconColor,
-      super.selectedIconColor,
-      super.margin,
-      super.borderRadius,
-      double? height,
-      bool? showSelectedLabels,
-      bool? isExtended})
-      : super(
-          height: height ?? kFloatingNavbarHeight,
-          showSelectedLabels: showSelectedLabels ?? true,
-          isExtended: isExtended ?? false,
-        );
+  FloatingNavbarDecoration({
+    super.backgroundColor,
+    super.unselectedIconColor,
+    super.selectedIconColor,
+    super.margin,
+    super.borderRadius,
+    double? height,
+    bool? showSelectedLabels,
+    bool? isExtended,
+  }) : super(
+         height: height ?? kFloatingNavbarHeight,
+         showSelectedLabels: showSelectedLabels ?? true,
+         isExtended: isExtended ?? false,
+       );
 
   factory FloatingNavbarDecoration.fromNavbarDecoration(
-          NavbarDecoration navbarDecoration) =>
-      FloatingNavbarDecoration(
-        backgroundColor: navbarDecoration.backgroundColor,
-        borderRadius: navbarDecoration.borderRadius,
-        margin: navbarDecoration.margin,
-        showSelectedLabels: navbarDecoration.showSelectedLabels,
-        unselectedIconColor: navbarDecoration.unselectedIconColor,
-        selectedIconColor: navbarDecoration.selectedIconColor,
-        isExtended: navbarDecoration.isExtended,
-      );
+    NavbarDecoration navbarDecoration,
+  ) => FloatingNavbarDecoration(
+    backgroundColor: navbarDecoration.backgroundColor,
+    borderRadius: navbarDecoration.borderRadius,
+    margin: navbarDecoration.margin,
+    showSelectedLabels: navbarDecoration.showSelectedLabels,
+    unselectedIconColor: navbarDecoration.unselectedIconColor,
+    selectedIconColor: navbarDecoration.selectedIconColor,
+    isExtended: navbarDecoration.isExtended,
+  );
 
   /// to navb bar decoration
 
   NavbarDecoration toNavbarDecoration() => NavbarDecoration(
-        backgroundColor: backgroundColor,
-        borderRadius: borderRadius,
-        unselectedIconColor: unselectedIconColor,
-        margin: margin,
-        selectedIconColor: selectedIconColor,
-        elevation: elevation,
-        showSelectedLabels: showSelectedLabels,
-        showUnselectedLabels: showSelectedLabels!,
-      );
+    backgroundColor: backgroundColor,
+    borderRadius: borderRadius,
+    unselectedIconColor: unselectedIconColor,
+    margin: margin,
+    selectedIconColor: selectedIconColor,
+    elevation: elevation,
+    showSelectedLabels: showSelectedLabels,
+    showUnselectedLabels: showSelectedLabels!,
+  );
 }

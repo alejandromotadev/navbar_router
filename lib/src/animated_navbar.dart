@@ -20,11 +20,13 @@ Widget buildBadge(
 ) {
   return badges.Badge(
     key: NavbarNotifier.badges[index].key,
-    position: NavbarNotifier.badges[index].position ??
+    position:
+        NavbarNotifier.badges[index].position ??
         (NavbarNotifier.badges[index].badgeText.isNotEmpty
             ? badges.BadgePosition.topEnd(top: -15, end: -15)
             : badges.BadgePosition.topEnd()),
-    badgeAnimation: NavbarNotifier.badges[index].badgeAnimation ??
+    badgeAnimation:
+        NavbarNotifier.badges[index].badgeAnimation ??
         badges.BadgeAnimation.slide(
           animationDuration: NavbarNotifier.badges[index].animationDuration,
           // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
@@ -37,27 +39,31 @@ Widget buildBadge(
     badgeStyle: badges.BadgeStyle(
       badgeColor: NavbarNotifier.badges[index].color ?? Colors.white,
     ),
-    badgeContent: NavbarNotifier.badges[index].badgeContent ??
+    badgeContent:
+        NavbarNotifier.badges[index].badgeContent ??
         Text(
           NavbarNotifier.badges[index].badgeText,
-          style: NavbarNotifier.badges[index].badgeTextStyle ??
+          style:
+              NavbarNotifier.badges[index].badgeTextStyle ??
               TextStyle(
-                  color: NavbarNotifier.badges[index].textColor ?? Colors.black,
-                  fontSize: 9),
+                color: NavbarNotifier.badges[index].textColor ?? Colors.black,
+                fontSize: 9,
+              ),
         ),
     child: child,
   );
 }
 
 class _AnimatedNavBar extends StatefulWidget {
-  const _AnimatedNavBar(
-      {super.key,
-      this.decoration,
-      required this.model,
-      this.isDesktop = false,
-      this.navbarType = NavbarType.standard,
-      required this.menuItems,
-      required this.onItemTapped});
+  const _AnimatedNavBar({
+    super.key,
+    this.decoration,
+    required this.model,
+    this.isDesktop = false,
+    this.navbarType = NavbarType.standard,
+    required this.menuItems,
+    required this.onItemTapped,
+  });
   final List<NavbarItem> menuItems;
   final NavbarNotifier model;
   final Function(int) onItemTapped;
@@ -120,8 +126,9 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
   void initState() {
     super.initState();
     _controller = AnimationController(
-        duration: const Duration(milliseconds: 500), vsync: this)
-      ..addListener(() => setState(() {}));
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    )..addListener(() => setState(() {}));
     setUpAnimation();
   }
 
@@ -139,41 +146,44 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final defaultDecoration = NavbarDecoration(
-        minWidth: 72.0,
-        minExtendedWidth: 200.0,
-        borderRadius: BorderRadius.circular(20.0),
-        selectedIconColor: theme.bottomNavigationBarTheme.selectedItemColor,
-        margin: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-        backgroundColor: theme.bottomNavigationBarTheme.backgroundColor ??
-            theme.colorScheme.surface,
-        elevation: 8,
-        height: kBottomNavigationBarHeight,
-        showUnselectedLabels: true,
-        unselectedIconColor: theme.bottomNavigationBarTheme.unselectedItemColor,
-        unselectedLabelColor:
-            theme.bottomNavigationBarTheme.unselectedItemColor ??
-                theme.primaryColor,
-        unselectedItemColor: theme.bottomNavigationBarTheme.unselectedItemColor,
-        unselectedLabelTextStyle:
-            theme.bottomNavigationBarTheme.unselectedLabelStyle ??
-                const TextStyle(color: Colors.black),
-        unselectedIconTheme: theme.iconTheme.copyWith(color: Colors.black),
-        selectedIconTheme: theme.iconTheme,
-        selectedLabelTextStyle:
-            theme.bottomNavigationBarTheme.selectedLabelStyle,
-        enableFeedback: true,
-        isExtended: true,
-        navbarType: BottomNavigationBarType.fixed,
-        showSelectedLabels: true,
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-        indicatorColor: theme.colorScheme.onSurface);
+      minWidth: 72.0,
+      minExtendedWidth: 200.0,
+      borderRadius: BorderRadius.circular(20.0),
+      selectedIconColor: theme.bottomNavigationBarTheme.selectedItemColor,
+      margin: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+      backgroundColor:
+          theme.bottomNavigationBarTheme.backgroundColor ??
+          theme.colorScheme.surface,
+      elevation: 8,
+      height: kBottomNavigationBarHeight,
+      showUnselectedLabels: true,
+      unselectedIconColor: theme.bottomNavigationBarTheme.unselectedItemColor,
+      unselectedLabelColor:
+          theme.bottomNavigationBarTheme.unselectedItemColor ??
+          theme.primaryColor,
+      unselectedItemColor: theme.bottomNavigationBarTheme.unselectedItemColor,
+      unselectedLabelTextStyle:
+          theme.bottomNavigationBarTheme.unselectedLabelStyle ??
+          const TextStyle(color: Colors.black),
+      unselectedIconTheme: theme.iconTheme.copyWith(color: Colors.black),
+      selectedIconTheme: theme.iconTheme,
+      selectedLabelTextStyle: theme.bottomNavigationBarTheme.selectedLabelStyle,
+      enableFeedback: true,
+      isExtended: true,
+      navbarType: BottomNavigationBarType.fixed,
+      showSelectedLabels: true,
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+      indicatorColor: theme.colorScheme.onSurface,
+    );
 
     NavbarDecoration navigationRailDefaultDecoration = NavbarDecoration(
-      minExtendedWidth: theme.navigationRailTheme.minExtendedWidth ??
+      minExtendedWidth:
+          theme.navigationRailTheme.minExtendedWidth ??
           widget.decoration!.minExtendedWidth,
       minWidth:
           theme.navigationRailTheme.minWidth ?? widget.decoration!.minWidth,
-      backgroundColor: theme.navigationRailTheme.backgroundColor ??
+      backgroundColor:
+          theme.navigationRailTheme.backgroundColor ??
           theme.colorScheme.surface,
       elevation: theme.navigationRailTheme.elevation,
       showUnselectedLabels: widget.decoration!.showUnselectedLabels,
@@ -193,8 +203,8 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
 
     final foregroundColor =
         defaultDecoration.backgroundColor!.computeLuminance() > 0.5
-            ? Colors.black
-            : Colors.white;
+        ? Colors.black
+        : Colors.white;
 
     NavbarBase buildNavBar() {
       switch (widget.navbarType) {
@@ -212,24 +222,28 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
           kNavbarHeight = kNotchedNavbarHeight;
           if (widget.decoration != null) {
             final decoration = defaultDecoration.copyWith(
-                backgroundColor: widget.decoration!.backgroundColor ??
-                    Theme.of(context).primaryColor,
-                elevation: widget.decoration!.elevation,
-                showUnselectedLabels: widget.decoration!.showUnselectedLabels,
-                selectedIconColor: widget.decoration!.selectedIconColor,
-                unselectedIconColor: widget.decoration!.unselectedIconColor,
-                unselectedLabelColor: widget.decoration!.unselectedLabelColor,
-                unselectedItemColor: widget.decoration!.unselectedItemColor,
-                unselectedLabelTextStyle:
-                    widget.decoration!.unselectedLabelTextStyle,
-                unselectedIconTheme: widget.decoration!.unselectedIconTheme,
-                selectedIconTheme: widget.decoration!.selectedIconTheme ??
-                    theme.iconTheme.copyWith(color: foregroundColor),
-                enableFeedback: widget.decoration!.enableFeedback,
-                showSelectedLabels: false);
+              backgroundColor:
+                  widget.decoration!.backgroundColor ??
+                  Theme.of(context).primaryColor,
+              elevation: widget.decoration!.elevation,
+              showUnselectedLabels: widget.decoration!.showUnselectedLabels,
+              selectedIconColor: widget.decoration!.selectedIconColor,
+              unselectedIconColor: widget.decoration!.unselectedIconColor,
+              unselectedLabelColor: widget.decoration!.unselectedLabelColor,
+              unselectedItemColor: widget.decoration!.unselectedItemColor,
+              unselectedLabelTextStyle:
+                  widget.decoration!.unselectedLabelTextStyle,
+              unselectedIconTheme: widget.decoration!.unselectedIconTheme,
+              selectedIconTheme:
+                  widget.decoration!.selectedIconTheme ??
+                  theme.iconTheme.copyWith(color: foregroundColor),
+              enableFeedback: widget.decoration!.enableFeedback,
+              showSelectedLabels: false,
+            );
             return NotchedNavBar(
-              notchDecoration:
-                  NotchedDecoration.fromNavbarDecoration(decoration),
+              notchDecoration: NotchedDecoration.fromNavbarDecoration(
+                decoration,
+              ),
               items: widget.menuItems,
               onTap: widget.onItemTapped,
               color: widget.decoration!.backgroundColor,
@@ -238,8 +252,9 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
             );
           } else {
             return NotchedNavBar(
-              notchDecoration:
-                  NotchedDecoration.fromNavbarDecoration(defaultDecoration),
+              notchDecoration: NotchedDecoration.fromNavbarDecoration(
+                defaultDecoration,
+              ),
               items: widget.menuItems,
               onTap: widget.onItemTapped,
               color: defaultDecoration.backgroundColor,
@@ -252,31 +267,38 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
           if (widget.decoration != null) {
             final decoration0 = defaultDecoration.copyWith(
               isExtended: widget.decoration!.isExtended,
-              backgroundColor: widget.decoration!.backgroundColor ??
+              backgroundColor:
+                  widget.decoration!.backgroundColor ??
                   theme.colorScheme.surface,
               elevation: widget.decoration!.elevation,
               height: widget.decoration!.height,
-              selectedIconColor: widget.decoration!.selectedIconColor ??
+              selectedIconColor:
+                  widget.decoration!.selectedIconColor ??
                   Theme.of(context).colorScheme.primary,
-              unselectedIconColor: widget.decoration!.unselectedIconColor ??
+              unselectedIconColor:
+                  widget.decoration!.unselectedIconColor ??
                   Theme.of(context).colorScheme.onSurface,
-              selectedIconTheme: widget.decoration!.selectedIconTheme ??
-                  theme.iconTheme
-                      .copyWith(color: theme.colorScheme.onSecondaryContainer),
-              indicatorColor: widget.decoration!.indicatorColor ??
+              selectedIconTheme:
+                  widget.decoration!.selectedIconTheme ??
+                  theme.iconTheme.copyWith(
+                    color: theme.colorScheme.onSecondaryContainer,
+                  ),
+              indicatorColor:
+                  widget.decoration!.indicatorColor ??
                   theme.colorScheme.secondaryContainer,
               labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
               indicatorShape: widget.decoration!.indicatorShape,
               selectedLabelTextStyle:
                   widget.decoration!.selectedLabelTextStyle ??
-                      theme.textTheme.bodySmall!.copyWith(
-                        color: theme.colorScheme.onSurface,
-                      ),
+                  theme.textTheme.bodySmall!.copyWith(
+                    color: theme.colorScheme.onSurface,
+                  ),
             );
             return M3NavBar(
               index: NavbarNotifier.currentIndex,
-              m3Decoration:
-                  M3NavbarDecoration.fromNavbarDecoration(decoration0),
+              m3Decoration: M3NavbarDecoration.fromNavbarDecoration(
+                decoration0,
+              ),
               items: widget.menuItems,
               onTap: widget.onItemTapped,
               navBarElevation: widget.decoration!.elevation,
@@ -286,8 +308,9 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
           } else {
             return M3NavBar(
               index: NavbarNotifier.currentIndex,
-              m3Decoration:
-                  M3NavbarDecoration.fromNavbarDecoration(defaultDecoration),
+              m3Decoration: M3NavbarDecoration.fromNavbarDecoration(
+                defaultDecoration,
+              ),
               labelBehavior: defaultDecoration.labelBehavior!,
               items: widget.menuItems,
               onTap: widget.onItemTapped,
@@ -301,27 +324,32 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
           if (widget.decoration != null) {
             final decoration = defaultDecoration.copyWith(
               borderRadius: widget.decoration!.borderRadius,
-              backgroundColor: widget.decoration!.backgroundColor ??
+              backgroundColor:
+                  widget.decoration!.backgroundColor ??
                   theme.colorScheme.surface,
               elevation: widget.decoration!.elevation,
               height: widget.decoration!.height,
-              selectedIconColor: widget.decoration!.selectedIconColor ??
+              selectedIconColor:
+                  widget.decoration!.selectedIconColor ??
                   theme.colorScheme.primary,
               unselectedIconColor: widget.decoration!.unselectedIconColor,
-              selectedIconTheme: widget.decoration!.selectedIconTheme ??
+              selectedIconTheme:
+                  widget.decoration!.selectedIconTheme ??
                   theme.iconTheme.copyWith(color: theme.colorScheme.primary),
-              indicatorColor: widget.decoration!.indicatorColor ??
+              indicatorColor:
+                  widget.decoration!.indicatorColor ??
                   theme.colorScheme.secondaryContainer,
               labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-              indicatorShape: widget.decoration!.indicatorShape ??
+              indicatorShape:
+                  widget.decoration!.indicatorShape ??
                   defaultDecoration.indicatorShape,
               margin: widget.decoration!.margin ?? defaultDecoration.margin,
               showSelectedLabels: widget.decoration?.showSelectedLabels,
               selectedLabelTextStyle:
                   widget.decoration!.selectedLabelTextStyle ??
-                      theme.textTheme.bodySmall!.copyWith(
-                        color: theme.colorScheme.onSurface,
-                      ),
+                  theme.textTheme.bodySmall!.copyWith(
+                    color: theme.colorScheme.onSurface,
+                  ),
             );
             return FloatingNavbar(
               index: NavbarNotifier.currentIndex,
@@ -350,81 +378,93 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
 
     Widget buildNavigationRail() {
       if (widget.decoration != null) {
-        navigationRailDefaultDecoration =
-            navigationRailDefaultDecoration.copyWith(
-          minExtendedWidth: widget.decoration!.minExtendedWidth,
-          minWidth: widget.decoration!.minWidth,
-          isExtended: widget.decoration!.isExtended,
-          enableFeedback: widget.decoration!.enableFeedback,
-          backgroundColor:
-              widget.decoration!.backgroundColor ?? theme.colorScheme.surface,
-          elevation: widget.decoration!.elevation ??
-              theme.navigationRailTheme.elevation,
-          selectedIconTheme: widget.decoration!.selectedIconTheme ??
-              theme.iconTheme
-                  .copyWith(color: theme.colorScheme.onSecondaryContainer),
-          indicatorColor: widget.decoration!.indicatorColor ??
-              theme.colorScheme.secondaryContainer,
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-          indicatorShape: widget.decoration!.indicatorShape,
-          selectedLabelTextStyle: widget.decoration!.selectedLabelTextStyle ??
-              theme.textTheme.bodySmall!.copyWith(
-                color: theme.colorScheme.onSurface,
-              ),
-        );
+        navigationRailDefaultDecoration = navigationRailDefaultDecoration
+            .copyWith(
+              minExtendedWidth: widget.decoration!.minExtendedWidth,
+              minWidth: widget.decoration!.minWidth,
+              isExtended: widget.decoration!.isExtended,
+              enableFeedback: widget.decoration!.enableFeedback,
+              backgroundColor:
+                  widget.decoration!.backgroundColor ??
+                  theme.colorScheme.surface,
+              elevation:
+                  widget.decoration!.elevation ??
+                  theme.navigationRailTheme.elevation,
+              selectedIconTheme:
+                  widget.decoration!.selectedIconTheme ??
+                  theme.iconTheme.copyWith(
+                    color: theme.colorScheme.onSecondaryContainer,
+                  ),
+              indicatorColor:
+                  widget.decoration!.indicatorColor ??
+                  theme.colorScheme.secondaryContainer,
+              labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+              indicatorShape: widget.decoration!.indicatorShape,
+              selectedLabelTextStyle:
+                  widget.decoration!.selectedLabelTextStyle ??
+                  theme.textTheme.bodySmall!.copyWith(
+                    color: theme.colorScheme.onSurface,
+                  ),
+            );
       }
 
       return NavigationRail(
-          minExtendedWidth: navigationRailDefaultDecoration.minExtendedWidth,
-          minWidth: navigationRailDefaultDecoration.minWidth,
-          elevation: navigationRailDefaultDecoration.elevation,
-          onDestinationSelected: (x) {
-            widget.onItemTapped(x);
-          },
-          labelType: navigationRailDefaultDecoration.isExtended
-              ? NavigationRailLabelType.none
-              : navigationRailDefaultDecoration.showUnselectedLabels
-                  ? NavigationRailLabelType.all
-                  : NavigationRailLabelType.selected,
-          useIndicator: true,
-          indicatorColor: navigationRailDefaultDecoration.indicatorColor ??
-              theme.colorScheme.secondaryContainer,
-          indicatorShape: navigationRailDefaultDecoration.indicatorShape,
-          selectedLabelTextStyle:
-              navigationRailDefaultDecoration.selectedLabelTextStyle,
-          unselectedLabelTextStyle:
-              navigationRailDefaultDecoration.unselectedLabelTextStyle,
-          unselectedIconTheme:
-              navigationRailDefaultDecoration.unselectedIconTheme,
-          selectedIconTheme:
-              navigationRailDefaultDecoration.selectedIconTheme ??
-                  theme.iconTheme
-                      .copyWith(color: theme.colorScheme.onSecondaryContainer),
-          extended: navigationRailDefaultDecoration.isExtended,
-          backgroundColor: navigationRailDefaultDecoration.backgroundColor ??
-              theme.colorScheme.surface,
-          destinations: [
-            for (int i = 0; i < widget.menuItems.length; i++)
-              NavigationRailDestination(
-                icon: buildBadge(i, Icon(widget.menuItems[i].iconData)),
-                label: Text(widget.menuItems[i].text),
-              )
-          ],
-          selectedIndex: NavbarNotifier.currentIndex);
+        minExtendedWidth: navigationRailDefaultDecoration.minExtendedWidth,
+        minWidth: navigationRailDefaultDecoration.minWidth,
+        elevation: navigationRailDefaultDecoration.elevation,
+        onDestinationSelected: (x) {
+          widget.onItemTapped(x);
+        },
+        labelType: navigationRailDefaultDecoration.isExtended
+            ? NavigationRailLabelType.none
+            : navigationRailDefaultDecoration.showUnselectedLabels
+            ? NavigationRailLabelType.all
+            : NavigationRailLabelType.selected,
+        useIndicator: true,
+        indicatorColor:
+            navigationRailDefaultDecoration.indicatorColor ??
+            theme.colorScheme.secondaryContainer,
+        indicatorShape: navigationRailDefaultDecoration.indicatorShape,
+        selectedLabelTextStyle:
+            navigationRailDefaultDecoration.selectedLabelTextStyle,
+        unselectedLabelTextStyle:
+            navigationRailDefaultDecoration.unselectedLabelTextStyle,
+        unselectedIconTheme:
+            navigationRailDefaultDecoration.unselectedIconTheme,
+        selectedIconTheme:
+            navigationRailDefaultDecoration.selectedIconTheme ??
+            theme.iconTheme.copyWith(
+              color: theme.colorScheme.onSecondaryContainer,
+            ),
+        extended: navigationRailDefaultDecoration.isExtended,
+        backgroundColor:
+            navigationRailDefaultDecoration.backgroundColor ??
+            theme.colorScheme.surface,
+        destinations: [
+          for (int i = 0; i < widget.menuItems.length; i++)
+            NavigationRailDestination(
+              icon: buildBadge(i, Icon(widget.menuItems[i].iconData)),
+              label: Text(widget.menuItems[i].text),
+            ),
+        ],
+        selectedIndex: NavbarNotifier.currentIndex,
+      );
     }
 
     // Todo: This should only be invoked when window size changes
     //  if this can have any performance implication
     setUpAnimation();
     return AnimatedBuilder(
-        animation: animation,
-        builder: (BuildContext context, Widget? child) {
-          return Transform.translate(
-              offset: widget.isDesktop
-                  ? Offset(-animation.value, 0)
-                  : Offset(0, animation.value),
-              child: widget.isDesktop ? buildNavigationRail() : buildNavBar());
-        });
+      animation: animation,
+      builder: (BuildContext context, Widget? child) {
+        return Transform.translate(
+          offset: widget.isDesktop
+              ? Offset(-animation.value, 0)
+              : Offset(0, animation.value),
+          child: widget.isDesktop ? buildNavigationRail() : buildNavBar(),
+        );
+      },
+    );
   }
 }
 
@@ -442,14 +482,15 @@ abstract class NavbarBase extends StatefulWidget {
 }
 
 class StandardNavbar extends NavbarBase {
-  const StandardNavbar(
-      {super.key,
-      required this.navBarDecoration,
-      required this.navBarElevation,
-      required this.onTap,
-      this.navbarHeight,
-      this.index = 0,
-      required this.items});
+  const StandardNavbar({
+    super.key,
+    required this.navBarDecoration,
+    required this.navBarElevation,
+    required this.onTap,
+    this.navbarHeight,
+    this.index = 0,
+    required this.items,
+  });
 
   final List<NavbarItem> items;
   final Function(int) onTap;
@@ -489,59 +530,59 @@ class StandardNavbarState extends State<StandardNavbar> {
   Widget build(BuildContext context) {
     final items = widget.menuItems;
     return BottomNavigationBar(
-        type: widget.decoration.navbarType,
-        currentIndex: NavbarNotifier.currentIndex,
-        onTap: (x) {
-          _selectedIndex = x;
-          widget.onItemTapped!(x);
-        },
-        backgroundColor: widget.decoration.backgroundColor,
-        showSelectedLabels: widget.decoration.showSelectedLabels,
-        enableFeedback: widget.decoration.enableFeedback,
-        showUnselectedLabels: widget.decoration.showUnselectedLabels,
-        elevation: widget.decoration.elevation,
-        iconSize: Theme.of(context).iconTheme.size ?? 24.0,
-        unselectedItemColor: widget.decoration.unselectedItemColor,
-        selectedItemColor: widget.decoration.selectedLabelTextStyle?.color,
-        unselectedLabelStyle: widget.decoration.unselectedLabelTextStyle,
-        selectedLabelStyle: widget.decoration.selectedLabelTextStyle,
-        selectedIconTheme: widget.decoration.selectedIconTheme,
-        unselectedIconTheme: widget.decoration.unselectedIconTheme,
-        items: [
-          for (int index = 0; index < items.length; index++)
-            BottomNavigationBarItem(
-              backgroundColor: items[index].backgroundColor,
-              icon: _selectedIndex == index
-                  ? buildBadge(
-                      index,
-                      items[index].selectedIcon ?? Icon(items[index].iconData),
-                    )
-                  : buildBadge(
-                      index,
-                      Icon(items[index].iconData),
-                    ),
-              label: items[index].text,
-            )
-        ]);
+      type: widget.decoration.navbarType,
+      currentIndex: NavbarNotifier.currentIndex,
+      onTap: (x) {
+        _selectedIndex = x;
+        widget.onItemTapped!(x);
+      },
+      backgroundColor: widget.decoration.backgroundColor,
+      showSelectedLabels: widget.decoration.showSelectedLabels,
+      enableFeedback: widget.decoration.enableFeedback,
+      showUnselectedLabels: widget.decoration.showUnselectedLabels,
+      elevation: widget.decoration.elevation,
+      iconSize: Theme.of(context).iconTheme.size ?? 24.0,
+      unselectedItemColor: widget.decoration.unselectedItemColor,
+      selectedItemColor: widget.decoration.selectedLabelTextStyle?.color,
+      unselectedLabelStyle: widget.decoration.unselectedLabelTextStyle,
+      selectedLabelStyle: widget.decoration.selectedLabelTextStyle,
+      selectedIconTheme: widget.decoration.selectedIconTheme,
+      unselectedIconTheme: widget.decoration.unselectedIconTheme,
+      items: [
+        for (int index = 0; index < items.length; index++)
+          BottomNavigationBarItem(
+            backgroundColor: items[index].backgroundColor,
+            icon: _selectedIndex == index
+                ? buildBadge(
+                    index,
+                    items[index].selectedIcon ?? Icon(items[index].iconData),
+                  )
+                : buildBadge(index, Icon(items[index].iconData)),
+            label: items[index].text,
+          ),
+      ],
+    );
   }
 }
 
 class NotchedNavBar extends NavbarBase {
-  const NotchedNavBar(
-      {super.key,
-      required this.notchDecoration,
-      required this.color,
-      required this.navBarElevation,
-      required this.onTap,
-      this.navbarHeight = kNotchedNavbarHeight,
-      this.index = 0,
-      required this.items})
-      : assert(items.length > 2,
-            """NotchedNavBar requires at least 3 items to function properly,
+  const NotchedNavBar({
+    super.key,
+    required this.notchDecoration,
+    required this.color,
+    required this.navBarElevation,
+    required this.onTap,
+    this.navbarHeight = kNotchedNavbarHeight,
+    this.index = 0,
+    required this.items,
+  }) : assert(
+         items.length > 2,
+         """NotchedNavBar requires at least 3 items to function properly,
             This is a temporary limitation and will be fixed in the future.
             If you need a navbar with less than 3 items, please use the StandardNavbar widget
             using the NavbarDecoration.navbarType: NavbarType.standard property.
-            """);
+            """,
+       );
 
   final List<NavbarItem> items;
   final Function(int) onTap;
@@ -594,41 +635,31 @@ class NotchedNavBarState extends State<NotchedNavBar>
   late AnimationController? _controller;
   late Animation<double> notchAnimation = CurvedAnimation(
     parent: _controller!,
-    curve: const Interval(
-      0.0,
-      0.8,
-      curve: Curves.bounceInOut,
-    ),
+    curve: const Interval(0.0, 0.8, curve: Curves.bounceInOut),
   );
 
-  late Animation<double> iconAnimation =
-      Tween<double>(begin: -10, end: 10).animate(CurvedAnimation(
-    parent: _controller!,
-    curve: const Interval(
-      0.6,
-      1.0,
-      curve: Curves.easeIn,
-    ),
-  ));
+  late Animation<double> iconAnimation = Tween<double>(begin: -10, end: 10)
+      .animate(
+        CurvedAnimation(
+          parent: _controller!,
+          curve: const Interval(0.6, 1.0, curve: Curves.easeIn),
+        ),
+      );
 
-  late Animation<double> opacityAnimation =
-      Tween<double>(begin: 0.2, end: 1).animate(CurvedAnimation(
-    parent: _controller!,
-    curve: const Interval(
-      0.2,
-      1.0,
-      curve: Curves.easeIn,
-    ),
-  ));
-  late Animation<double> scaleAnimation =
-      Tween<double>(begin: 1.0, end: 1.4).animate(CurvedAnimation(
-    parent: _controller!,
-    curve: const Interval(
-      0.6,
-      1.0,
-      curve: Curves.easeIn,
-    ),
-  ));
+  late Animation<double> opacityAnimation = Tween<double>(begin: 0.2, end: 1)
+      .animate(
+        CurvedAnimation(
+          parent: _controller!,
+          curve: const Interval(0.2, 1.0, curve: Curves.easeIn),
+        ),
+      );
+  late Animation<double> scaleAnimation = Tween<double>(begin: 1.0, end: 1.4)
+      .animate(
+        CurvedAnimation(
+          parent: _controller!,
+          curve: const Interval(0.6, 1.0, curve: Curves.easeIn),
+        ),
+      );
 
   void _startAnimation() async {
     _controller!.reset();
@@ -648,71 +679,81 @@ class NotchedNavBarState extends State<NotchedNavBar>
 
   Widget circularButton() {
     return Container(
-        height: 60,
-        width: 60,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: widget.decoration.backgroundColor,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withAlpha(51),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: const Offset(0, 3), // changes position of shadow
+      height: 60,
+      width: 60,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: widget.decoration.backgroundColor,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withAlpha(51),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: buildBadge(
+        NavbarNotifier.currentIndex,
+        widget.menuItems[NavbarNotifier.currentIndex].selectedIcon ??
+            Icon(
+              widget.menuItems[NavbarNotifier.currentIndex].iconData,
+              color: widget.decoration.selectedIconColor,
+              size:
+                  (widget.decoration.selectedIconTheme?.size ?? 24.0) *
+                  scaleAnimation.value,
             ),
-          ],
-        ),
-        child: buildBadge(
-            NavbarNotifier.currentIndex,
-            widget.menuItems[NavbarNotifier.currentIndex].selectedIcon ??
-                Icon(
-                  widget.menuItems[NavbarNotifier.currentIndex].iconData,
-                  color: widget.decoration.selectedIconColor,
-                  size: (widget.decoration.selectedIconTheme?.size ?? 24.0) *
-                      scaleAnimation.value,
-                )));
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final selectedWidget = AnimatedBuilder(
-        animation: _controller!,
-        builder: (context, snapshot) {
-          return Transform.translate(
-            offset: Offset(0, -iconAnimation.value),
-            child: Opacity(
-              opacity: opacityAnimation.value,
-              child: SizedBox(
-                  height: 58.0,
-                  width: 58.0,
-                  child: FittedBox(child: circularButton())),
+      animation: _controller!,
+      builder: (context, snapshot) {
+        return Transform.translate(
+          offset: Offset(0, -iconAnimation.value),
+          child: Opacity(
+            opacity: opacityAnimation.value,
+            child: SizedBox(
+              height: 58.0,
+              width: 58.0,
+              child: FittedBox(child: circularButton()),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
 
     return Material(
       color: Colors.transparent,
       child: Stack(
         children: [
           AnimatedBuilder(
-              animation: _controller!,
-              builder: (context, snapshot) {
-                return ClipPath(
-                    clipper: NotchedClipper(
-                        index: NavbarNotifier.currentIndex,
-                        animation: notchAnimation.value),
-                    child: Material(
-                      color: widget.decoration.backgroundColor,
-                      child: SizedBox(
-                        height: widget.navbarHeight,
-                        width: double.infinity,
-                      ),
-                    ));
-              }),
-          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            for (int i = 0; i < widget.menuItems.length; i++)
-              Expanded(
+            animation: _controller!,
+            builder: (context, snapshot) {
+              return ClipPath(
+                clipper: NotchedClipper(
+                  index: NavbarNotifier.currentIndex,
+                  animation: notchAnimation.value,
+                ),
+                child: Material(
+                  color: widget.decoration.backgroundColor,
+                  child: SizedBox(
+                    height: widget.navbarHeight,
+                    width: double.infinity,
+                  ),
+                ),
+              );
+            },
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (int i = 0; i < widget.menuItems.length; i++)
+                Expanded(
                   child: _selectedIndex == i
                       ? selectedWidget
                       : InkWell(
@@ -729,8 +770,10 @@ class NotchedNavBarState extends State<NotchedNavBar>
                               decoration: widget.decoration,
                             ),
                           ),
-                        ))
-          ]),
+                        ),
+                ),
+            ],
+          ),
         ],
       ),
     );
@@ -743,11 +786,12 @@ class MenuTile extends StatelessWidget {
   final NavbarItem item;
   final int index;
 
-  const MenuTile(
-      {super.key,
-      required this.item,
-      required this.decoration,
-      required this.index});
+  const MenuTile({
+    super.key,
+    required this.item,
+    required this.decoration,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -756,20 +800,23 @@ class MenuTile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         buildBadge(
-            index,
-            Icon(
-              item.iconData,
-              color: decoration.unselectedIconColor ??
-                  decoration.unselectedItemColor,
-            )),
-        const SizedBox(
-          height: 6,
+          index,
+          Icon(
+            item.iconData,
+            color:
+                decoration.unselectedIconColor ??
+                decoration.unselectedItemColor,
+          ),
         ),
+        const SizedBox(height: 6),
         decoration.showUnselectedLabels
             ? Flexible(
-                child:
-                    Text(item.text, style: decoration.unselectedLabelTextStyle))
-            : const SizedBox.shrink()
+                child: Text(
+                  item.text,
+                  style: decoration.unselectedLabelTextStyle,
+                ),
+              )
+            : const SizedBox.shrink(),
       ],
     );
   }
@@ -801,8 +848,11 @@ class NotchedClipper extends CustomClipper<Path> {
     Offset point2 = Offset(point1.dx, 20);
     path.quadraticBezierTo(point1.dx, point1.dy, point2.dx, point2.dy);
     Offset point3 = Offset(centerX + curveRadius, 20);
-    path.arcToPoint(point3,
-        radius: const Radius.circular(10), clockwise: false);
+    path.arcToPoint(
+      point3,
+      radius: const Radius.circular(10),
+      clockwise: false,
+    );
     Offset point4 = Offset(point3.dx, -8);
     Offset point5 = Offset(point4.dx + 40, 0);
     path.quadraticBezierTo(point4.dx, point4.dy, point5.dx, point5.dy);
@@ -831,7 +881,11 @@ class WaveClipper extends CustomClipper<Path> {
     path.moveTo(0, height * 0.5);
     path.lineTo(0, height * 0.8);
     path.quadraticBezierTo(
-        width * 0.25, height * 0.75, width * 0.5, height * 0.8);
+      width * 0.25,
+      height * 0.75,
+      width * 0.5,
+      height * 0.8,
+    );
     path.quadraticBezierTo(width * 0.75, height * 0.85, width, height * 0.8);
     path.lineTo(width, height);
     path.close();
@@ -888,62 +942,72 @@ class M3NavBarState extends State<M3NavBar> {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-          navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: widget.decoration.backgroundColor ??
-            Theme.of(context).colorScheme.surface,
-        elevation: widget.elevation,
-        labelTextStyle:
-            WidgetStateProperty.all(widget.decoration.selectedLabelTextStyle),
-        indicatorShape: widget.decoration.indicatorShape ??
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        iconTheme: WidgetStateProperty.all(widget.decoration.selectedIconTheme),
-        labelBehavior: widget.decoration.showUnselectedLabels
-            ? NavigationDestinationLabelBehavior.alwaysShow
-            : NavigationDestinationLabelBehavior.onlyShowSelected,
-        indicatorColor: widget.decoration.indicatorColor,
-        height: widget.height,
-      )),
+        navigationBarTheme: NavigationBarThemeData(
+          backgroundColor:
+              widget.decoration.backgroundColor ??
+              Theme.of(context).colorScheme.surface,
+          elevation: widget.elevation,
+          labelTextStyle: WidgetStateProperty.all(
+            widget.decoration.selectedLabelTextStyle,
+          ),
+          indicatorShape:
+              widget.decoration.indicatorShape ??
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          iconTheme: WidgetStateProperty.all(
+            widget.decoration.selectedIconTheme,
+          ),
+          labelBehavior: widget.decoration.showUnselectedLabels
+              ? NavigationDestinationLabelBehavior.alwaysShow
+              : NavigationDestinationLabelBehavior.onlyShowSelected,
+          indicatorColor: widget.decoration.indicatorColor,
+          height: widget.height,
+        ),
+      ),
       child: MediaQuery(
         data: MediaQuery.of(context).removePadding(removeTop: true),
         child: NavigationBar(
-            height: widget.height,
-            backgroundColor: widget.decoration.backgroundColor ??
-                Theme.of(context).colorScheme.surface,
-            animationDuration: const Duration(milliseconds: 300),
-            elevation: widget.elevation,
-            indicatorColor: widget.decoration.indicatorColor,
-            indicatorShape: widget.decoration.indicatorShape,
-            labelBehavior: widget.labelBehavior,
-            destinations: [
-              for (int i = 0; i < widget.items.length; i++)
-                NavigationDestination(
-                  tooltip: widget.items[i].text,
-                  icon: buildBadge(i, Icon(widget.items[i].iconData)),
-                  label: widget.items[i].text,
-                  selectedIcon: buildBadge(
-                      i,
-                      widget.items[i].selectedIcon ??
-                          Icon(widget.items[i].iconData)),
-                )
-            ],
-            selectedIndex: NavbarNotifier.currentIndex,
-            onDestinationSelected: (int index) => widget.onItemTapped!(index)),
+          height: widget.height,
+          backgroundColor:
+              widget.decoration.backgroundColor ??
+              Theme.of(context).colorScheme.surface,
+          animationDuration: const Duration(milliseconds: 300),
+          elevation: widget.elevation,
+          indicatorColor: widget.decoration.indicatorColor,
+          indicatorShape: widget.decoration.indicatorShape,
+          labelBehavior: widget.labelBehavior,
+          destinations: [
+            for (int i = 0; i < widget.items.length; i++)
+              NavigationDestination(
+                tooltip: widget.items[i].text,
+                icon: buildBadge(i, Icon(widget.items[i].iconData)),
+                label: widget.items[i].text,
+                selectedIcon: buildBadge(
+                  i,
+                  widget.items[i].selectedIcon ??
+                      Icon(widget.items[i].iconData),
+                ),
+              ),
+          ],
+          selectedIndex: NavbarNotifier.currentIndex,
+          onDestinationSelected: (int index) => widget.onItemTapped!(index),
+        ),
       ),
     );
   }
 }
 
 class FloatingNavbar extends NavbarBase {
-  const FloatingNavbar(
-      {super.key,
-      required this.navBarDecoration,
-      required this.navBarElevation,
-      required this.onTap,
-      this.navbarHeight = kFloatingNavbarHeight,
-      this.index = 0,
-      this.margin,
-      this.borderRadius,
-      required this.items});
+  const FloatingNavbar({
+    super.key,
+    required this.navBarDecoration,
+    required this.navBarElevation,
+    required this.onTap,
+    this.navbarHeight = kFloatingNavbarHeight,
+    this.index = 0,
+    this.margin,
+    this.borderRadius,
+    required this.items,
+  });
 
   final List<NavbarItem> items;
   final Function(int) onTap;
@@ -991,6 +1055,9 @@ class FloatingNavbarState extends State<FloatingNavbar> {
   }
 
   Widget _unselectedIcon(int i) {
+    if (widget.items[i].unselectedIcon != null) {
+      return widget.items[i].unselectedIcon!;
+    }
     return Icon(
       widget.items[i].iconData,
       size: 26,
@@ -1004,84 +1071,98 @@ class FloatingNavbarState extends State<FloatingNavbar> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Theme(
-        data: Theme.of(context).copyWith(
-            navigationBarTheme: NavigationBarThemeData(
-          backgroundColor: widget.decoration.backgroundColor ??
+      data: Theme.of(context).copyWith(
+        navigationBarTheme: NavigationBarThemeData(
+          backgroundColor:
+              widget.decoration.backgroundColor ??
               Theme.of(context).colorScheme.surface,
           elevation: widget.elevation,
-          labelTextStyle:
-              WidgetStateProperty.all(widget.decoration.selectedLabelTextStyle),
-          indicatorShape: widget.decoration.indicatorShape ??
+          labelTextStyle: WidgetStateProperty.all(
+            widget.decoration.selectedLabelTextStyle,
+          ),
+          indicatorShape:
+              widget.decoration.indicatorShape ??
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
-          iconTheme:
-              WidgetStateProperty.all(widget.decoration.selectedIconTheme),
+          iconTheme: WidgetStateProperty.all(
+            widget.decoration.selectedIconTheme,
+          ),
           labelBehavior: widget.decoration.showSelectedLabels!
               ? NavigationDestinationLabelBehavior.onlyShowSelected
               : NavigationDestinationLabelBehavior.alwaysShow,
           indicatorColor: widget.decoration.indicatorColor,
           height: widget.height,
-        )),
-        child: Container(
-          height: widget.navbarHeight,
-          margin: widget.margin ??
-              const EdgeInsets.symmetric(horizontal: 40.0, vertical: 18.0),
-          decoration: BoxDecoration(
-            borderRadius: widget.borderRadius ??
-                const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)),
-            color: widget.decoration.backgroundColor ??
-                Theme.of(context).colorScheme.surface,
-            boxShadow: [
-              BoxShadow(
-                color: isDark
-                    ? Colors.black.withAlpha(51)
-                    : Colors.grey.withAlpha(51),
-                spreadRadius: 2,
-                blurRadius: 6,
-                offset: const Offset(3, 4), // hanges position of shadow
+        ),
+      ),
+      child: Container(
+        height: widget.navbarHeight,
+        margin:
+            widget.margin ??
+            const EdgeInsets.symmetric(horizontal: 40.0, vertical: 18.0),
+        decoration: BoxDecoration(
+          borderRadius:
+              widget.borderRadius ??
+              const BorderRadius.only(
+                topLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
               ),
-            ],
-          ),
-          child: Row(
-            children: [
-              for (int i = 0; i < widget.items.length; i++)
-                Expanded(
-                    child: Material(
+          color:
+              widget.decoration.backgroundColor ??
+              Theme.of(context).colorScheme.surface,
+          boxShadow: [
+            BoxShadow(
+              color: isDark
+                  ? Colors.black.withAlpha(51)
+                  : Colors.grey.withAlpha(51),
+              spreadRadius: 2,
+              blurRadius: 6,
+              offset: const Offset(3, 4), // hanges position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            for (int i = 0; i < widget.items.length; i++)
+              Expanded(
+                child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                      enableFeedback: widget.decoration.enableFeedback!,
-                      borderRadius:
-                          widget.borderRadius ?? BorderRadius.circular(16.0),
-                      onTap: () {
-                        _selectedIndex = i;
-                        widget.onItemTapped!(i);
-                      },
-                      child: SizedBox(
-                        height: widget.navbarHeight,
-                        child: widget.items[i].child ??
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                _selectedIndex == i
-                                    ? buildBadge(
-                                        i,
-                                        widget.items[i].selectedIcon ??
-                                            _unselectedIcon(i))
-                                    : buildBadge(i, _unselectedIcon(i)),
-                                if (widget.decoration.showSelectedLabels! &&
-                                    widget.index == i)
-                                  Text(
-                                    widget.items[i].text,
-                                    style: widget
-                                        .decoration.selectedLabelTextStyle,
-                                  )
-                              ],
-                            ),
-                      )),
-                ))
-            ],
-          ),
-        ));
+                    enableFeedback: widget.decoration.enableFeedback!,
+                    borderRadius:
+                        widget.borderRadius ?? BorderRadius.circular(16.0),
+                    onTap: () {
+                      _selectedIndex = i;
+                      widget.onItemTapped!(i);
+                    },
+                    child: SizedBox(
+                      height: widget.navbarHeight,
+                      child:
+                          widget.items[i].child ??
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _selectedIndex == i
+                                  ? buildBadge(
+                                      i,
+                                      widget.items[i].selectedIcon ??
+                                          _unselectedIcon(i),
+                                    )
+                                  : buildBadge(i, _unselectedIcon(i)),
+                              if (widget.decoration.showSelectedLabels! &&
+                                  widget.index == i)
+                                Text(
+                                  widget.items[i].text,
+                                  style:
+                                      widget.decoration.selectedLabelTextStyle,
+                                ),
+                            ],
+                          ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
   }
 }
