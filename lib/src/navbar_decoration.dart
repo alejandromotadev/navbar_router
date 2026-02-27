@@ -8,6 +8,7 @@ class NavbarItem {
     this.backgroundColor,
     this.child,
     this.selectedIcon,
+    this.unselectedIcon,
     this.badge = const NavbarBadge(),
   });
 
@@ -31,6 +32,9 @@ class NavbarItem {
   /// Your initial badge configuration for this item, this is totally optional
   final NavbarBadge badge;
 
+  /// Widget to show when the item is unselected
+  final Widget? unselectedIcon;
+
   @override
   bool operator ==(Object other) {
     bool result =
@@ -40,6 +44,7 @@ class NavbarItem {
         text == other.text &&
         child.runtimeType == other.child.runtimeType &&
         selectedIcon.runtimeType == other.selectedIcon.runtimeType &&
+        unselectedIcon.runtimeType == other.unselectedIcon.runtimeType &&
         backgroundColor == other.backgroundColor &&
         badge == other.badge;
     if ((other as NavbarItem).selectedIcon.runtimeType == Icon && result) {
@@ -57,6 +62,7 @@ class NavbarItem {
       text.hashCode ^
       child.hashCode ^
       selectedIcon.hashCode ^
+      unselectedIcon.hashCode ^
       backgroundColor.hashCode ^
       badge.hashCode;
 }
